@@ -1,6 +1,5 @@
 import csv
 import re
-import json
 from typing import List
 from checksum import calculate_checksum, serialize_result
 
@@ -74,4 +73,4 @@ if __name__ == '__main__':
 
         serialize_result(my_variant, result_hash)
     else:
-        print(f"ОШИБКА: Найдено {len(invalid_rows)} строк. Должно быть 1000.")
+        print(f"ОШИБКА: Найдено {len(invalid_rows)} строк. Должно быть 1000")
