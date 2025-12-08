@@ -2,6 +2,7 @@ import csv
 import re
 import json
 from typing import List
+from checksum import calculate_checksum, serialize_result
 
 
 def get_regex_patterns() -> dict:
@@ -60,8 +61,17 @@ def process_csv(filepath: str) -> List[int]:
 
 if __name__ == '__main__':
     csv_filename = '59.csv'
+    my_variant = 59
 
     invalid_rows = process_csv(csv_filename)
     print(f"Найдено невалидных строк: {len(invalid_rows)}")
 
     print(invalid_rows)
+
+    if len(invalid_rows) == 1000:
+        result_hash = calculate_checksum(invalid_rows)
+        print(f"Контрольная сумма: {result_hash}")
+
+        serialize_result(my_variant, result_hash)
+    else:
+        print(f"ОШИБКА: Найдено {len(invalid_rows)} строк. Должно быть 1000.")
