@@ -10,6 +10,9 @@ class DatabaseHandler:
     def __init__(self):
         self._init_db()
 
+    def _get_connection(self) -> sqlite3.Connection:
+        return sqlite3.connect(DB_PATH)
+
     def _init_db(self) -> None:
         query_timer = """
         CREATE TABLE IF NOT EXISTS time_entries (
