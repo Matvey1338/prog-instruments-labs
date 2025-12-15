@@ -17,7 +17,7 @@ class AppMonitor:
     def start(self):
         if self.running:
             return
-        logger.info("Запуск монитора активных окон")  # <--- INFO
+        logger.info("Запуск монитора активных окон")
         self.running = True
         self.thread = threading.Thread(target = self._loop, daemon = True)
         self.thread.start()
@@ -35,12 +35,12 @@ class AppMonitor:
 
                 if app_name:
                     # Используем trace или debug, чтобы не засорять основной лог,
-                    logger.debug(f"Активное окно: {app_name}")  # <--- DEBUG
+                    logger.debug(f"Активное окно: {app_name}")
                     self.db.increment_app_usage(app_name, self._interval)
 
             except Exception as e:
                 # Логируем ошибку, но не роняем приложение
-                logger.error(f"Ошибка в цикле мониторинга: {e}")  # <--- ERROR
+                logger.error(f"Ошибка в цикле мониторинга: {e}")
 
             time.sleep(self._interval)
 
@@ -57,5 +57,5 @@ class AppMonitor:
             return process.name()
         except Exception as e:
             # Например, access denied
-            logger.warning(f"Не удалось получить имя процесса: {e}")  # <--- WARNING
+            logger.warning(f"Не удалось получить имя процесса: {e}")
             return None

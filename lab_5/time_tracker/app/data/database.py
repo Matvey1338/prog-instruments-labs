@@ -36,7 +36,7 @@ class DatabaseHandler:
                 conn.execute(query_activity)
             logger.debug("Проверка/создание таблиц БД выполнена")
         except sqlite3.Error as e:
-            logger.critical(f"Ошибка инициализации БД: {e}")  # <--- CRITICAL
+            logger.critical(f"Ошибка инициализации БД: {e}")
             raise
 
     def add_entry(self, entry: TimeEntry) -> None:
@@ -51,9 +51,9 @@ class DatabaseHandler:
                     entry.start_time.isoformat(),
                     entry.end_time.isoformat()
                 ))
-            logger.debug(f"Запись сохранена в БД: {entry.task_name}")  # <--- DEBUG
+            logger.debug(f"Запись сохранена в БД: {entry.task_name}")
         except sqlite3.Error as e:
-            logger.error(f"Ошибка сохранения записи: {e}") # <--- ERROR
+            logger.error(f"Ошибка сохранения записи: {e}")
 
     def get_all_entries(self) -> List[TimeEntry]:
         query = "SELECT id, task_name, start_time, end_time FROM time_entries ORDER BY id DESC"

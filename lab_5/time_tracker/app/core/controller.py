@@ -9,7 +9,7 @@ from app.core.monitor import AppMonitor
 
 class TimerController:
     def __init__(self):
-        logger.debug("Инициализация контроллера")  # <--- DEBUG
+        logger.debug("Инициализация контроллера")
         self.db = DatabaseHandler()
         self.monitor = AppMonitor(self.db)
 
@@ -23,14 +23,14 @@ class TimerController:
 
     def stop_all_threads(self):
         """Вызывать при полном выходе."""
-        logger.info("Остановка всех фоновых потоков...")  # <--- INFO
+        logger.info("Остановка всех фоновых потоков...")
         self.monitor.stop()
 
     def start_timer(self, task_name: str) -> None:
         if not task_name.strip():
             task_name = "Без названия"
 
-        logger.info(f"Старт таймера: '{task_name}'")  # <--- INFO
+        logger.info(f"Старт таймера: '{task_name}'")
 
         self.current_task_name = task_name
         self.current_start_time = datetime.now()
@@ -38,7 +38,7 @@ class TimerController:
 
     def stop_timer(self) -> Optional[TimeEntry]:
         if not self.is_running or not self.current_start_time:
-            logger.warning("Попытка остановить таймер, который не был запущен.")  # <--- WARNING
+            logger.warning("Попытка остановить таймер, который не был запущен.")
             return None
 
         end_time = datetime.now()
@@ -53,7 +53,7 @@ class TimerController:
         # Расчет длительности для лога
         duration = (end_time - self.current_start_time).total_seconds()
         logger.info(
-            f"Таймер остановлен. Задача: '{self.current_task_name}', Длительность: {duration:.2f} сек.")  # <--- INFO
+            f"Таймер остановлен. Задача: '{self.current_task_name}', Длительность: {duration:.2f} сек.")
 
         self.is_running = False
         self.current_start_time = None
